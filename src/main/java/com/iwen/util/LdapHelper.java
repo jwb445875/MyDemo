@@ -1,4 +1,4 @@
-package com.iwen.bookTicket.util;
+package com.iwen.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import javax.naming.directory.InitialDirContext;
 import java.util.Hashtable;
 
 /**
- * Created by Administrator on 2018/11/29.
+ * ldap服务器连接工具
  */
 public class LdapHelper {
 

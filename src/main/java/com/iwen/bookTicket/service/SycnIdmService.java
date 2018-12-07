@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.*;
 
 
-import com.iwen.bookTicket.util.LdapHelper;
+import com.iwen.util.LdapHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
