@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iwen.bookTicket.dao.UserMapper">
+<mapper namespace="com.iwen.plan.dao.UserMapper">
 
-	<select id="getUserByAccount" resultType="com.iwen.plan.dao.TSUser">
-		SELECT top 1 id,account from sys_user where UPPER(account) = UPPER(#{account}) and state=0
+	<select id="getUserByAccount" resultType="com.iwen.plan.bean.TSUser">
+		SELECT id,username as account from t_s_base_user  where username=#{account} LIMIT 0,1
 	</select>
 
 
