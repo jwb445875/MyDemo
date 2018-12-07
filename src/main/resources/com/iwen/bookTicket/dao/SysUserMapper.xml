@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwen.bookTicket.dao.SysUserMapper">
+
+	<select id="getUserByAccount" resultType="com.iwen.bookTicket.bean.SysUser">
+		SELECT top 1 id,account from sys_user where UPPER(account) = UPPER(#{account}) and state=0
+	</select>
+	<select id="getNoPhoneUser" resultType="com.iwen.bookTicket.bean.SysUser">
+		SELECT top 100 id,account from sys_user where iphone is null or iphone ='' and state=0
+	</select>
+	<update id="upPhone" >
+		update  sys_user set iphone=#{iphone} where id=#{id}
+	</update>
+
+</mapper>
