@@ -52,4 +52,10 @@ public class SysUserController {
         return "finish";
     }
 
+    @RequestMapping("upAll")
+    public String upAll() {
+        userService.upAll();
+        return "finish";
+    }
+
 }

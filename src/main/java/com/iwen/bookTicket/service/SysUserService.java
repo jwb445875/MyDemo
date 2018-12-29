@@ -1,5 +1,6 @@
 package com.iwen.bookTicket.service;
 
+import com.iwen.bookTicket.bean.Idm;
 import com.iwen.bookTicket.bean.SysUser;
 import com.iwen.bookTicket.dao.SysUserMapper;
 import com.iwen.util.LdapHelper;
@@ -44,6 +45,15 @@ public class SysUserService {
 		}
 		logger.info("第"+i+"次更新---------------------错误共有数据："+error);
 		return users.size();
+	}
+
+	public void upAll(){
+		try {
+			List <Idm> idms=sycnIdmService.getAll();
+		}catch (Exception e){
+
+		}
+
 	}
 
 }

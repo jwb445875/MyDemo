@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iwen.bookTicket.dao.IdmMapper" >
+  <resultMap id="BaseResultMap" type="com.iwen.bookTicket.bean.Idm" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="smart-alias" property="smartAlias" jdbcType="VARCHAR" />
+    <result column="cn" property="cn" jdbcType="VARCHAR" />
+    <result column="employeenumber" property="employeenumber" jdbcType="VARCHAR" />
+    <result column="departmentnumber" property="departmentnumber" jdbcType="VARCHAR" />
+    <result column="departmentname" property="departmentname" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="smart-idcardnumber" property="smartIdcardnumber" jdbcType="VARCHAR" />
+    <result column="smart-idcardtype" property="smartIdcardtype" jdbcType="VARCHAR" />
+    <result column="smart-gender" property="smartGender" jdbcType="VARCHAR" />
+    <result column="smart-birthday" property="smartBirthday" jdbcType="VARCHAR" />
+    <result column="smart-type" property="smartType" jdbcType="VARCHAR" />
+    <result column="smart-status" property="smartStatus" jdbcType="VARCHAR" />
+    <result column="smart-parttimedept" property="smartParttimedept" jdbcType="VARCHAR" />
+    <result column="smart-parttimepost" property="smartParttimepost" jdbcType="VARCHAR" />
+    <result column="smart-securemobile" property="smartSecuremobile" jdbcType="VARCHAR" />
+    <result column="smart-authority" property="smartAuthority" jdbcType="VARCHAR" />
+    <result column="createTimestamp" property="createtimestamp" jdbcType="VARCHAR" />
+    <result column="modifyTimestamp" property="modifytimestamp" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="telephoneNumber" property="telephonenumber" jdbcType="VARCHAR" />
+    <result column="facsimileTelephoneNumber" property="facsimiletelephonenumber" jdbcType="VARCHAR" />
+    <result column="postalAddress" property="postaladdress" jdbcType="VARCHAR" />
+    <result column="postalCode" property="postalcode" jdbcType="VARCHAR" />
+    <result column="homephone" property="homephone" jdbcType="VARCHAR" />
+    <result column="homePostalAddress" property="homepostaladdress" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="smart-order" property="smartOrder" jdbcType="VARCHAR" />
+    <result column="ds-pwp-account-expiration-time" property="dsPwpAccountExpirationTime" jdbcType="VARCHAR" />
+    <result column="ds-pwp-password-expiration-time" property="dsPwpPasswordExpirationTime" jdbcType="VARCHAR" />
+    <result column="ds-pwp-account-disabled" property="dsPwpAccountDisabled" jdbcType="VARCHAR" />
+    <result column="customized-companyid" property="customizedCompanyid" jdbcType="VARCHAR" />
+    <result column="customized-company" property="customizedCompany" jdbcType="VARCHAR" />
+    <result column="customized-positionid" property="customizedPositionid" jdbcType="VARCHAR" />
+    <result column="customized-positionname" property="customizedPositionname" jdbcType="VARCHAR" />
+    <result column="customized-joinsysdate" property="customizedJoinsysdate" jdbcType="VARCHAR" />
+    <result column="customized-outdutydate" property="customizedOutdutydate" jdbcType="VARCHAR" />
+    <result column="customized-creator" property="customizedCreator" jdbcType="VARCHAR" />
+    <result column="customized-modifier" property="customizedModifier" jdbcType="VARCHAR" />
+    <result column="customized-updatetype" property="customizedUpdatetype" jdbcType="VARCHAR" />
+    <result column="smart-sources" property="smartSources" jdbcType="VARCHAR" />
+    <result column="customized-reserve2" property="customizedReserve2" jdbcType="VARCHAR" />
+    <result column="customized-reserve3" property="customizedReserve3" jdbcType="VARCHAR" />
+    <result column="customized-reserve4" property="customizedReserve4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, smart-alias, cn, employeenumber, departmentnumber, departmentname, mail, userpassword, 
+    smart-idcardnumber, smart-idcardtype, smart-gender, smart-birthday, smart-type, smart-status, 
+    smart-parttimedept, smart-parttimepost, smart-securemobile, smart-authority, createTimestamp, 
+    modifyTimestamp, mobile, telephoneNumber, facsimileTelephoneNumber, postalAddress, 
+    postalCode, homephone, homePostalAddress, manager, smart-order, ds-pwp-account-expiration-time, 
+    ds-pwp-password-expiration-time, ds-pwp-account-disabled, customized-companyid, customized-company, 
+    customized-positionid, customized-positionname, customized-joinsysdate, customized-outdutydate, 
+    customized-creator, customized-modifier, customized-updatetype, smart-sources, customized-reserve2, 
+    customized-reserve3, customized-reserve4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iwen.bookTicket.bean.IdmExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from idm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from idm
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from idm
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iwen.bookTicket.bean.IdmExample" >
+    delete from idm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iwen.bookTicket.bean.Idm" >
+    insert into idm (uid, smart-alias, cn, 
+      employeenumber, departmentnumber, departmentname, 
+      mail, userpassword, smart-idcardnumber, 
+      smart-idcardtype, smart-gender, smart-birthday, 
+      smart-type, smart-status, smart-parttimedept, 
+      smart-parttimepost, smart-securemobile, smart-authority, 
+      createTimestamp, modifyTimestamp, mobile, 
+      telephoneNumber, facsimileTelephoneNumber, 
+      postalAddress, postalCode, homephone, 
+      homePostalAddress, manager, smart-order, 
+      ds-pwp-account-expiration-time, ds-pwp-password-expiration-time, 
+      ds-pwp-account-disabled, customized-companyid, 
+      customized-company, customized-positionid, 
+      customized-positionname, customized-joinsysdate, 
+      customized-outdutydate, customized-creator, 
+      customized-modifier, customized-updatetype, 
+      smart-sources, customized-reserve2, customized-reserve3, 
+      customized-reserve4)
+    values (#{uid,jdbcType=VARCHAR}, #{smartAlias,jdbcType=VARCHAR}, #{cn,jdbcType=VARCHAR}, 
+      #{employeenumber,jdbcType=VARCHAR}, #{departmentnumber,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{smartIdcardnumber,jdbcType=VARCHAR}, 
+      #{smartIdcardtype,jdbcType=VARCHAR}, #{smartGender,jdbcType=VARCHAR}, #{smartBirthday,jdbcType=VARCHAR}, 
+      #{smartType,jdbcType=VARCHAR}, #{smartStatus,jdbcType=VARCHAR}, #{smartParttimedept,jdbcType=VARCHAR}, 
+      #{smartParttimepost,jdbcType=VARCHAR}, #{smartSecuremobile,jdbcType=VARCHAR}, #{smartAuthority,jdbcType=VARCHAR}, 
+      #{createtimestamp,jdbcType=VARCHAR}, #{modifytimestamp,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{telephonenumber,jdbcType=VARCHAR}, #{facsimiletelephonenumber,jdbcType=VARCHAR}, 
+      #{postaladdress,jdbcType=VARCHAR}, #{postalcode,jdbcType=VARCHAR}, #{homephone,jdbcType=VARCHAR}, 
+      #{homepostaladdress,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{smartOrder,jdbcType=VARCHAR}, 
+      #{dsPwpAccountExpirationTime,jdbcType=VARCHAR}, #{dsPwpPasswordExpirationTime,jdbcType=VARCHAR}, 
+      #{dsPwpAccountDisabled,jdbcType=VARCHAR}, #{customizedCompanyid,jdbcType=VARCHAR}, 
+      #{customizedCompany,jdbcType=VARCHAR}, #{customizedPositionid,jdbcType=VARCHAR}, 
+      #{customizedPositionname,jdbcType=VARCHAR}, #{customizedJoinsysdate,jdbcType=VARCHAR}, 
+      #{customizedOutdutydate,jdbcType=VARCHAR}, #{customizedCreator,jdbcType=VARCHAR}, 
+      #{customizedModifier,jdbcType=VARCHAR}, #{customizedUpdatetype,jdbcType=VARCHAR}, 
+      #{smartSources,jdbcType=VARCHAR}, #{customizedReserve2,jdbcType=VARCHAR}, #{customizedReserve3,jdbcType=VARCHAR}, 
+      #{customizedReserve4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iwen.bookTicket.bean.Idm" >
+    insert into idm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="smartAlias != null" >
+        smart-alias,
+      </if>
+      <if test="cn != null" >
+        cn,
+      </if>
+      <if test="employeenumber != null" >
+        employeenumber,
+      </if>
+      <if test="departmentnumber != null" >
+        departmentnumber,
+      </if>
+      <if test="departmentname != null" >
+        departmentname,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="userpassword != null" >
+        userpassword,
+      </if>
+      <if test="smartIdcardnumber != null" >
+        smart-idcardnumber,
+      </if>
+      <if test="smartIdcardtype != null" >
+        smart-idcardtype,
+      </if>
+      <if test="smartGender != null" >
+        smart-gender,
+      </if>
+      <if test="smartBirthday != null" >
+        smart-birthday,
+      </if>
+      <if test="smartType != null" >
+        smart-type,
+      </if>
+      <if test="smartStatus != null" >
+        smart-status,
+      </if>
+      <if test="smartParttimedept != null" >
+        smart-parttimedept,
+      </if>
+      <if test="smartParttimepost != null" >
+        smart-parttimepost,
+      </if>
+      <if test="smartSecuremobile != null" >
+        smart-securemobile,
+      </if>
+      <if test="smartAuthority != null" >
+        smart-authority,
+      </if>
+      <if test="createtimestamp != null" >
+        createTimestamp,
+      </if>
+      <if test="modifytimestamp != null" >
+        modifyTimestamp,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="telephonenumber != null" >
+        telephoneNumber,
+      </if>
+      <if test="facsimiletelephonenumber != null" >
+        facsimileTelephoneNumber,
+      </if>
+      <if test="postaladdress != null" >
+        postalAddress,
+      </if>
+      <if test="postalcode != null" >
+        postalCode,
+      </if>
+      <if test="homephone != null" >
+        homephone,
+      </if>
+      <if test="homepostaladdress != null" >
+        homePostalAddress,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="smartOrder != null" >
+        smart-order,
+      </if>
+      <if test="dsPwpAccountExpirationTime != null" >
+        ds-pwp-account-expiration-time,
+      </if>
+      <if test="dsPwpPasswordExpirationTime != null" >
+        ds-pwp-password-expiration-time,
+      </if>
+      <if test="dsPwpAccountDisabled != null" >
+        ds-pwp-account-disabled,
+      </if>
+      <if test="customizedCompanyid != null" >
+        customized-companyid,
+      </if>
+      <if test="customizedCompany != null" >
+        customized-company,
+      </if>
+      <if test="customizedPositionid != null" >
+        customized-positionid,
+      </if>
+      <if test="customizedPositionname != null" >
+        customized-positionname,
+      </if>
+      <if test="customizedJoinsysdate != null" >
+        customized-joinsysdate,
+      </if>
+      <if test="customizedOutdutydate != null" >
+        customized-outdutydate,
+      </if>
+      <if test="customizedCreator != null" >
+        customized-creator,
+      </if>
+      <if test="customizedModifier != null" >
+        customized-modifier,
+      </if>
+      <if test="customizedUpdatetype != null" >
+        customized-updatetype,
+      </if>
+      <if test="smartSources != null" >
+        smart-sources,
+      </if>
+      <if test="customizedReserve2 != null" >
+        customized-reserve2,
+      </if>
+      <if test="customizedReserve3 != null" >
+        customized-reserve3,
+      </if>
+      <if test="customizedReserve4 != null" >
+        customized-reserve4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="smartAlias != null" >
+        #{smartAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cn != null" >
+        #{cn,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenumber != null" >
+        #{employeenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentnumber != null" >
+        #{departmentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="smartIdcardnumber != null" >
+        #{smartIdcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="smartIdcardtype != null" >
+        #{smartIdcardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smartGender != null" >
+        #{smartGender,jdbcType=VARCHAR},
+      </if>
+      <if test="smartBirthday != null" >
+        #{smartBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="smartType != null" >
+        #{smartType,jdbcType=VARCHAR},
+      </if>
+      <if test="smartStatus != null" >
+        #{smartStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="smartParttimedept != null" >
+        #{smartParttimedept,jdbcType=VARCHAR},
+      </if>
+      <if test="smartParttimepost != null" >
+        #{smartParttimepost,jdbcType=VARCHAR},
+      </if>
+      <if test="smartSecuremobile != null" >
+        #{smartSecuremobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smartAuthority != null" >
+        #{smartAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="createtimestamp != null" >
+        #{createtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytimestamp != null" >
+        #{modifytimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephonenumber != null" >
+        #{telephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="facsimiletelephonenumber != null" >
+        #{facsimiletelephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="postaladdress != null" >
+        #{postaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null" >
+        #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="homepostaladdress != null" >
+        #{homepostaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="smartOrder != null" >
+        #{smartOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpAccountExpirationTime != null" >
+        #{dsPwpAccountExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpPasswordExpirationTime != null" >
+        #{dsPwpPasswordExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpAccountDisabled != null" >
+        #{dsPwpAccountDisabled,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCompanyid != null" >
+        #{customizedCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCompany != null" >
+        #{customizedCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedPositionid != null" >
+        #{customizedPositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedPositionname != null" >
+        #{customizedPositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedJoinsysdate != null" >
+        #{customizedJoinsysdate,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedOutdutydate != null" >
+        #{customizedOutdutydate,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCreator != null" >
+        #{customizedCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedModifier != null" >
+        #{customizedModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedUpdatetype != null" >
+        #{customizedUpdatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="smartSources != null" >
+        #{smartSources,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve2 != null" >
+        #{customizedReserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve3 != null" >
+        #{customizedReserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve4 != null" >
+        #{customizedReserve4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iwen.bookTicket.bean.IdmExample" resultType="java.lang.Integer" >
+    select count(*) from idm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update idm
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartAlias != null" >
+        smart-alias = #{record.smartAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cn != null" >
+        cn = #{record.cn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeenumber != null" >
+        employeenumber = #{record.employeenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentnumber != null" >
+        departmentnumber = #{record.departmentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentname != null" >
+        departmentname = #{record.departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null" >
+        mail = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpassword != null" >
+        userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartIdcardnumber != null" >
+        smart-idcardnumber = #{record.smartIdcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartIdcardtype != null" >
+        smart-idcardtype = #{record.smartIdcardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartGender != null" >
+        smart-gender = #{record.smartGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartBirthday != null" >
+        smart-birthday = #{record.smartBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartType != null" >
+        smart-type = #{record.smartType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartStatus != null" >
+        smart-status = #{record.smartStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartParttimedept != null" >
+        smart-parttimedept = #{record.smartParttimedept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartParttimepost != null" >
+        smart-parttimepost = #{record.smartParttimepost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartSecuremobile != null" >
+        smart-securemobile = #{record.smartSecuremobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartAuthority != null" >
+        smart-authority = #{record.smartAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtimestamp != null" >
+        createTimestamp = #{record.createtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifytimestamp != null" >
+        modifyTimestamp = #{record.modifytimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephonenumber != null" >
+        telephoneNumber = #{record.telephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facsimiletelephonenumber != null" >
+        facsimileTelephoneNumber = #{record.facsimiletelephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postaladdress != null" >
+        postalAddress = #{record.postaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalcode != null" >
+        postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        homephone = #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homepostaladdress != null" >
+        homePostalAddress = #{record.homepostaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartOrder != null" >
+        smart-order = #{record.smartOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsPwpAccountExpirationTime != null" >
+        ds-pwp-account-expiration-time = #{record.dsPwpAccountExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsPwpPasswordExpirationTime != null" >
+        ds-pwp-password-expiration-time = #{record.dsPwpPasswordExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsPwpAccountDisabled != null" >
+        ds-pwp-account-disabled = #{record.dsPwpAccountDisabled,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedCompanyid != null" >
+        customized-companyid = #{record.customizedCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedCompany != null" >
+        customized-company = #{record.customizedCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedPositionid != null" >
+        customized-positionid = #{record.customizedPositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedPositionname != null" >
+        customized-positionname = #{record.customizedPositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedJoinsysdate != null" >
+        customized-joinsysdate = #{record.customizedJoinsysdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedOutdutydate != null" >
+        customized-outdutydate = #{record.customizedOutdutydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedCreator != null" >
+        customized-creator = #{record.customizedCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedModifier != null" >
+        customized-modifier = #{record.customizedModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedUpdatetype != null" >
+        customized-updatetype = #{record.customizedUpdatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smartSources != null" >
+        smart-sources = #{record.smartSources,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedReserve2 != null" >
+        customized-reserve2 = #{record.customizedReserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedReserve3 != null" >
+        customized-reserve3 = #{record.customizedReserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customizedReserve4 != null" >
+        customized-reserve4 = #{record.customizedReserve4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update idm
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      smart-alias = #{record.smartAlias,jdbcType=VARCHAR},
+      cn = #{record.cn,jdbcType=VARCHAR},
+      employeenumber = #{record.employeenumber,jdbcType=VARCHAR},
+      departmentnumber = #{record.departmentnumber,jdbcType=VARCHAR},
+      departmentname = #{record.departmentname,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR},
+      userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      smart-idcardnumber = #{record.smartIdcardnumber,jdbcType=VARCHAR},
+      smart-idcardtype = #{record.smartIdcardtype,jdbcType=VARCHAR},
+      smart-gender = #{record.smartGender,jdbcType=VARCHAR},
+      smart-birthday = #{record.smartBirthday,jdbcType=VARCHAR},
+      smart-type = #{record.smartType,jdbcType=VARCHAR},
+      smart-status = #{record.smartStatus,jdbcType=VARCHAR},
+      smart-parttimedept = #{record.smartParttimedept,jdbcType=VARCHAR},
+      smart-parttimepost = #{record.smartParttimepost,jdbcType=VARCHAR},
+      smart-securemobile = #{record.smartSecuremobile,jdbcType=VARCHAR},
+      smart-authority = #{record.smartAuthority,jdbcType=VARCHAR},
+      createTimestamp = #{record.createtimestamp,jdbcType=VARCHAR},
+      modifyTimestamp = #{record.modifytimestamp,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      telephoneNumber = #{record.telephonenumber,jdbcType=VARCHAR},
+      facsimileTelephoneNumber = #{record.facsimiletelephonenumber,jdbcType=VARCHAR},
+      postalAddress = #{record.postaladdress,jdbcType=VARCHAR},
+      postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      homephone = #{record.homephone,jdbcType=VARCHAR},
+      homePostalAddress = #{record.homepostaladdress,jdbcType=VARCHAR},
+      manager = #{record.manager,jdbcType=VARCHAR},
+      smart-order = #{record.smartOrder,jdbcType=VARCHAR},
+      ds-pwp-account-expiration-time = #{record.dsPwpAccountExpirationTime,jdbcType=VARCHAR},
+      ds-pwp-password-expiration-time = #{record.dsPwpPasswordExpirationTime,jdbcType=VARCHAR},
+      ds-pwp-account-disabled = #{record.dsPwpAccountDisabled,jdbcType=VARCHAR},
+      customized-companyid = #{record.customizedCompanyid,jdbcType=VARCHAR},
+      customized-company = #{record.customizedCompany,jdbcType=VARCHAR},
+      customized-positionid = #{record.customizedPositionid,jdbcType=VARCHAR},
+      customized-positionname = #{record.customizedPositionname,jdbcType=VARCHAR},
+      customized-joinsysdate = #{record.customizedJoinsysdate,jdbcType=VARCHAR},
+      customized-outdutydate = #{record.customizedOutdutydate,jdbcType=VARCHAR},
+      customized-creator = #{record.customizedCreator,jdbcType=VARCHAR},
+      customized-modifier = #{record.customizedModifier,jdbcType=VARCHAR},
+      customized-updatetype = #{record.customizedUpdatetype,jdbcType=VARCHAR},
+      smart-sources = #{record.smartSources,jdbcType=VARCHAR},
+      customized-reserve2 = #{record.customizedReserve2,jdbcType=VARCHAR},
+      customized-reserve3 = #{record.customizedReserve3,jdbcType=VARCHAR},
+      customized-reserve4 = #{record.customizedReserve4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iwen.bookTicket.bean.Idm" >
+    update idm
+    <set >
+      <if test="smartAlias != null" >
+        smart-alias = #{smartAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cn != null" >
+        cn = #{cn,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenumber != null" >
+        employeenumber = #{employeenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentnumber != null" >
+        departmentnumber = #{departmentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null" >
+        departmentname = #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        userpassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="smartIdcardnumber != null" >
+        smart-idcardnumber = #{smartIdcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="smartIdcardtype != null" >
+        smart-idcardtype = #{smartIdcardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smartGender != null" >
+        smart-gender = #{smartGender,jdbcType=VARCHAR},
+      </if>
+      <if test="smartBirthday != null" >
+        smart-birthday = #{smartBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="smartType != null" >
+        smart-type = #{smartType,jdbcType=VARCHAR},
+      </if>
+      <if test="smartStatus != null" >
+        smart-status = #{smartStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="smartParttimedept != null" >
+        smart-parttimedept = #{smartParttimedept,jdbcType=VARCHAR},
+      </if>
+      <if test="smartParttimepost != null" >
+        smart-parttimepost = #{smartParttimepost,jdbcType=VARCHAR},
+      </if>
+      <if test="smartSecuremobile != null" >
+        smart-securemobile = #{smartSecuremobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smartAuthority != null" >
+        smart-authority = #{smartAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="createtimestamp != null" >
+        createTimestamp = #{createtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytimestamp != null" >
+        modifyTimestamp = #{modifytimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephonenumber != null" >
+        telephoneNumber = #{telephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="facsimiletelephonenumber != null" >
+        facsimileTelephoneNumber = #{facsimiletelephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="postaladdress != null" >
+        postalAddress = #{postaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        postalCode = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null" >
+        homephone = #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="homepostaladdress != null" >
+        homePostalAddress = #{homepostaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="smartOrder != null" >
+        smart-order = #{smartOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpAccountExpirationTime != null" >
+        ds-pwp-account-expiration-time = #{dsPwpAccountExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpPasswordExpirationTime != null" >
+        ds-pwp-password-expiration-time = #{dsPwpPasswordExpirationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dsPwpAccountDisabled != null" >
+        ds-pwp-account-disabled = #{dsPwpAccountDisabled,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCompanyid != null" >
+        customized-companyid = #{customizedCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCompany != null" >
+        customized-company = #{customizedCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedPositionid != null" >
+        customized-positionid = #{customizedPositionid,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedPositionname != null" >
+        customized-positionname = #{customizedPositionname,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedJoinsysdate != null" >
+        customized-joinsysdate = #{customizedJoinsysdate,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedOutdutydate != null" >
+        customized-outdutydate = #{customizedOutdutydate,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedCreator != null" >
+        customized-creator = #{customizedCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedModifier != null" >
+        customized-modifier = #{customizedModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedUpdatetype != null" >
+        customized-updatetype = #{customizedUpdatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="smartSources != null" >
+        smart-sources = #{smartSources,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve2 != null" >
+        customized-reserve2 = #{customizedReserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve3 != null" >
+        customized-reserve3 = #{customizedReserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="customizedReserve4 != null" >
+        customized-reserve4 = #{customizedReserve4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iwen.bookTicket.bean.Idm" >
+    update idm
+    set smart-alias = #{smartAlias,jdbcType=VARCHAR},
+      cn = #{cn,jdbcType=VARCHAR},
+      employeenumber = #{employeenumber,jdbcType=VARCHAR},
+      departmentnumber = #{departmentnumber,jdbcType=VARCHAR},
+      departmentname = #{departmentname,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      userpassword = #{userpassword,jdbcType=VARCHAR},
+      smart-idcardnumber = #{smartIdcardnumber,jdbcType=VARCHAR},
+      smart-idcardtype = #{smartIdcardtype,jdbcType=VARCHAR},
+      smart-gender = #{smartGender,jdbcType=VARCHAR},
+      smart-birthday = #{smartBirthday,jdbcType=VARCHAR},
+      smart-type = #{smartType,jdbcType=VARCHAR},
+      smart-status = #{smartStatus,jdbcType=VARCHAR},
+      smart-parttimedept = #{smartParttimedept,jdbcType=VARCHAR},
+      smart-parttimepost = #{smartParttimepost,jdbcType=VARCHAR},
+      smart-securemobile = #{smartSecuremobile,jdbcType=VARCHAR},
+      smart-authority = #{smartAuthority,jdbcType=VARCHAR},
+      createTimestamp = #{createtimestamp,jdbcType=VARCHAR},
+      modifyTimestamp = #{modifytimestamp,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      telephoneNumber = #{telephonenumber,jdbcType=VARCHAR},
+      facsimileTelephoneNumber = #{facsimiletelephonenumber,jdbcType=VARCHAR},
+      postalAddress = #{postaladdress,jdbcType=VARCHAR},
+      postalCode = #{postalcode,jdbcType=VARCHAR},
+      homephone = #{homephone,jdbcType=VARCHAR},
+      homePostalAddress = #{homepostaladdress,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR},
+      smart-order = #{smartOrder,jdbcType=VARCHAR},
+      ds-pwp-account-expiration-time = #{dsPwpAccountExpirationTime,jdbcType=VARCHAR},
+      ds-pwp-password-expiration-time = #{dsPwpPasswordExpirationTime,jdbcType=VARCHAR},
+      ds-pwp-account-disabled = #{dsPwpAccountDisabled,jdbcType=VARCHAR},
+      customized-companyid = #{customizedCompanyid,jdbcType=VARCHAR},
+      customized-company = #{customizedCompany,jdbcType=VARCHAR},
+      customized-positionid = #{customizedPositionid,jdbcType=VARCHAR},
+      customized-positionname = #{customizedPositionname,jdbcType=VARCHAR},
+      customized-joinsysdate = #{customizedJoinsysdate,jdbcType=VARCHAR},
+      customized-outdutydate = #{customizedOutdutydate,jdbcType=VARCHAR},
+      customized-creator = #{customizedCreator,jdbcType=VARCHAR},
+      customized-modifier = #{customizedModifier,jdbcType=VARCHAR},
+      customized-updatetype = #{customizedUpdatetype,jdbcType=VARCHAR},
+      smart-sources = #{smartSources,jdbcType=VARCHAR},
+      customized-reserve2 = #{customizedReserve2,jdbcType=VARCHAR},
+      customized-reserve3 = #{customizedReserve3,jdbcType=VARCHAR},
+      customized-reserve4 = #{customizedReserve4,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="selectPageResult" extends="BaseResultMap" type="com.iwen.bookTicket.bean.Idm" >
+    <!--
+<association property="" column="" javaType="">
+   <id column="" property="" jdbcType="" />
+   <result column="" property="" jdbcType="" />
+ </association>
+-->
+  </resultMap>
+  <sql id="select_by_page_outter_where_sql" >
+      <if test="oredCriteria.size>0">     <if test="_parameter != null" > <include refid="Example_Where_Clause"/> </if>    and   </if>  <if test="oredCriteria.size==0">     where   </if> 
+  </sql>
+  <sql id="select_by_page_inner_where_and_orderby_sql" >
+      <if test="oredCriteria.size>0">     <if test="_parameter != null" > <include refid="Example_Where_Clause"/> </if>  </if>   <if test="orderByClause != null">    order by ${orderByClause}   </if> 
+  </sql>
+  <sql id="select_by_page_outter_orderby_sql" >
+       <if test="orderByClause != null">    order by ${orderByClause}   </if> 
+  </sql>
+  <select id="selectPage" resultMap="selectPageResult" parameterType="com.iwen.bookTicket.bean.IdmExample" >
+    select a.* from idm a where a.uid in 
+ (select top ${limitEnd} uid from idm 
+<include refid="select_by_page_outter_where_sql"/> 
+uid not in (select top ${limitStart} uid from idm  
+<include refid="select_by_page_inner_where_and_orderby_sql"/> 
+ ) 
+<include refid="select_by_page_outter_orderby_sql"/> 
+ ) 
+<include refid="select_by_page_outter_orderby_sql"/> 
+
+  </select>
+</mapper>
