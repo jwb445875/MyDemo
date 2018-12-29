@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwen.bookTicket.dao.ExtHrDeptMapper">
+
+
+
+	<select id="getByDepartmentId" resultType="com.iwen.bookTicket.bean.CostDeptVO">
+		SELECT top 1 A.*,ud.id ucid from(
+		SELECT
+			id,department_name name,
+			(SELECT top 1 id FROM sys_user WHERE  UPPER(account) = UPPER(#{account}) and state=0) uid
+		FROM
+			hr_dept
+		WHERE
+			 department_id=#{departmentId}
+		)A
+		LEFT JOIN sys_user_hr_dept ud ON A.id = ud.hr_dept_id
+		AND ud.sys_user_id = A.uid
+	</select>
+	<insert id="addSycnHrDept" parameterType="com.iwen.bookTicket.bean.CostDeptVO" useGeneratedKeys="true" keyProperty="id">
+		insert into hr_dept (department_name, department_id)
+		values (#{name,jdbcType=VARCHAR},#{departmentId,jdbcType=VARCHAR})
+	</insert>
+	<update id="upName">
+		UPDATE  hr_dept set department_name=#{name} where id=#{id}
+	</update>
+	<insert id="addSycnHrUser">
+		insert into sys_user_hr_dept (sys_user_id, hr_dept_id)
+		values (#{uid},#{cid})
+	</insert>
+	<delete id="delSycnHrUser">
+		DELETE from sys_user_hr_dept where sys_user_id=#{uid}
+	</delete>
+	<update id="upPhone">
+		UPDATE sys_user SET iphone=#{phone} where account=#{account}
+	</update>
+
+</mapper>

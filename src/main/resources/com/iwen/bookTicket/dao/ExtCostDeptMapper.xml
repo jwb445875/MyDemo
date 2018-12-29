@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iwen.bookTicket.dao.ExtCostDeptMapper">
+
+	
+
+	<select id="getByDepartmentId" resultType="com.iwen.bookTicket.bean.CostDeptVO">
+		SELECT top 1 A.*,ud.id ucid from(
+		SELECT
+			id,department_name name,
+			(SELECT top 1 id FROM sys_user WHERE  UPPER(account) = UPPER(#{account}) and state=0) uid
+		FROM
+			cost_dept
+		WHERE
+			is_disabled = 0 and department_id=#{departmentId}
+		)A
+		LEFT JOIN sys_user_cost_dept ud ON A.id = ud.cost_dept_id
+		AND ud.sys_user_id = A.uid
+	</select>
+	<insert id="addSycnCostDept" parameterType="com.iwen.bookTicket.bean.CostDeptVO" useGeneratedKeys="true" keyProperty="id">
+		insert into cost_dept (department_name, department_id,level_num,is_disabled)
+		values (#{name,jdbcType=VARCHAR},#{departmentId,jdbcType=VARCHAR},2,0)
+	</insert>
+	<update id="upName">
+		UPDATE  cost_dept set department_name=#{name} where id=#{id}
+	</update>
+	<select id="getUidByAccount" resultType="Integer">
+		SELECT top 1 id FROM sys_user WHERE UPPER(account) = UPPER(#{account}) and state=0
+	</select>
+	<insert id="addSycnCostUser">
+		insert into sys_user_cost_dept (sys_user_id, cost_dept_id)
+		values (#{uid},#{cid})
+	</insert>
+	<delete id="delSycnCostUser">
+		DELETE from sys_user_cost_dept where sys_user_id=#{uid}
+	</delete>
+
+</mapper>
