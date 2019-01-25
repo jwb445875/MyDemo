@@ -31,7 +31,7 @@ public class CostDeptController {
     private JobLogMapper jobLogMapper;
 
     @RequestMapping("upAll")
-    public String upAll2(String sycnDate) {
+    public Object upAll2(String sycnDate) {
         String filter;
         if(sycnDate!=null&&sycnDate.length()==10){
             filter="(&(|(createTimestamp>="+sycnDate.replaceAll("-","")+"160000Z)(modifyTimestamp>="+sycnDate.replaceAll("-","")+"160000Z))(smart-type=E1))";

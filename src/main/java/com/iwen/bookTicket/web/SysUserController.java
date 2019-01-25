@@ -24,13 +24,13 @@ public class SysUserController {
 
 
     @RequestMapping("getUser")
-    public String getUser(String account) {
+    public Object getUser(String account) {
         SysUser u=userService.getUserByAccount(account);
         return "hello"+u.getId();
     }
 
     @RequestMapping("getPhone")
-    public String getPhone(String account) {
+    public Object getPhone(String account) {
         String phone;
         try {
              phone=sycnIdmService.getIdmPhone(account);
@@ -42,7 +42,7 @@ public class SysUserController {
     }
 
     @RequestMapping("upPhone")
-    public String upPhone() {
+    public Object upPhone() {
         int count=100;
         int i=1;
         while (count!=0){
@@ -53,7 +53,7 @@ public class SysUserController {
     }
 
     @RequestMapping("upAll")
-    public String upAll() {
+    public Object upAll() {
         userService.upAll();
         return "finish";
     }

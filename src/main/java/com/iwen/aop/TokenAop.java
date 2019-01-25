@@ -33,7 +33,7 @@ public class TokenAop {
     private String appPrefixUrl="/iwen";
 
     // 配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
-    @Pointcut("execution(public * com.iwen.*.web.controller..*.*(..))")
+    @Pointcut("execution(public * com.iwen.*.web..*.*(..))")
     public void pointCut() {}
 
     // 配置环绕通知,使用在方法aspect()上注册的切入点
