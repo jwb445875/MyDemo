@@ -26,6 +26,7 @@
 		<commons-lang.version>2.6</commons-lang.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<guava.version>16.0.1</guava.version>
+		<poi.version>3.17</poi.version>
 	</properties>
 
 	<dependencies>
@@ -105,6 +106,22 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
 		</dependency>
 	</dependencies>
 
