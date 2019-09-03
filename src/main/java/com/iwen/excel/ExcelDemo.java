@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import com.iwen.plan.bean.ImportNode;
 import com.iwen.util.excel.ExcelExpSingleton;
 import com.iwen.util.excel.ExcelUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,11 +23,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+
+@Api(value = "ExcelDemo", description = "excel导入导出demo")
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/excel")
 public class ExcelDemo {
 
+    @ApiOperation(value = "excel导出demo", notes = "excel导出demo", response = String.class)
     @GetMapping(value = "out")
     public void out(HttpServletResponse response) {
         ExcelExpSingleton singleton =  ExcelExpSingleton.getInstance();
@@ -41,8 +46,9 @@ public class ExcelDemo {
         singleton.init("demo.xlsx",beans,"测试导出",response);
     }
 
+    @ApiOperation(value = "excel导入demo", notes = "excel导入demo", response = String.class)
     @GetMapping(value = "in")
-    public void reportExcel(HttpServletResponse response) {
+    public void reportExcel() {
         FileInputStream is;
         Workbook wb;
         try {
