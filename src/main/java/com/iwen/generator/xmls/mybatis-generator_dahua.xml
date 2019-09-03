@@ -1,0 +1,95 @@
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- 基础包 只用一个 -->
+	<!-- mysql
+    <classPathEntry location="/Users/iwen/项目/MyDemo/libs/jtds-1.3.1.jar" /> -->
+	<!-- oracle  -->
+	<classPathEntry location="/Users/iwen/项目/MyDemo/libs/classes12.jar" />
+	<!-- sqlserver
+    <classPathEntry location="/Users/iwen/项目/MyDemo/libs/sqljdbc.jar" />-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 分页插件 只用一个 -->
+		<!-- mysql
+		<plugin type="MysqlPaginationPlugin"></plugin>-->
+        <!-- oracle  -->
+        <plugin type="OraclePaginationPlugin"></plugin>
+        <!-- sqlserver 
+        <plugin type="SqlServicePaginationPlugin"></plugin>-->
+		
+		<!-- 通用 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<!--<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> 
+			<property name="searchString" value="Example$"/>
+			<property name="replaceString" value="Criteria"/>
+		</plugin> -->
+
+        <commentGenerator>
+        	<!-- 不生成注释 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库连接 只用一个 -->
+		<!-- mysql
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+         connectionURL="jdbc:mysql://10.129.36.91:3306/foundation"
+	 	 userId="apps"
+         password="Temp_123">
+    	</jdbcConnection>-->
+
+        <!-- oracle -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@172.20.28.147:1521:orcl"
+            userId="PLANS" password="PLANS">
+        </jdbcConnection>
+        
+        <!-- sqlserver
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            connectionURL="jdbc:sqlserver://192.168.20.11:1433;DatabaseName=vsp"
+            userId="sa" password="sa">
+        <jdbcConnection> -->
+        
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.movitech.mbox.modules.wdt.operateLog.entity" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.movitech.mbox.modules.wdt.operateLog.dao" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        
+      
+    	 <table tableName="pl_plan_node_history" domainObjectName="pl_plan_node_history" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+    	 <table tableName="pl_plan_node" domainObjectName="pl_plan_node" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+    	 <table tableName="pl_plan" domainObjectName="pl_plan" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+ 		<table tableName="pl_plan_version" domainObjectName="pl_plan_version" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+
+
+    	<table tableName="pl_plan_rate" domainObjectName="pl_plan_rate" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+
+    </context>
+</generatorConfiguration>
