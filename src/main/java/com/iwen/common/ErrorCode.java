@@ -5,7 +5,8 @@ public enum ErrorCode {
     SYSTRM_ERROR(1,"系统异常"),
     NO_TOKEN(2,"token不存在"),
     SIGN_ERROR(4,"签名错误"),
-    OFF_LINE(3,"用户已离线")
+    OFF_LINE(3,"用户已离线"),
+    Delete_file(5,"删除文件失败")
     ;
 
     private ErrorCode(int code,String message) {
