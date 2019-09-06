@@ -72,24 +72,12 @@
         </javaClientGenerator>
 
         
-      
-    	 <table tableName="pl_plan_node_history" domainObjectName="pl_plan_node_history" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
-    	 <table tableName="pl_plan_node" domainObjectName="pl_plan_node" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
+
     	 <table tableName="pl_plan" domainObjectName="pl_plan" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
      		 <property name="useActualColumnNames" value="false"/>
     	</table>
  		<table tableName="pl_plan_version" domainObjectName="pl_plan_version" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
      		 <property name="useActualColumnNames" value="false"/>
     	</table>
-
-
-    	<table tableName="pl_plan_rate" domainObjectName="pl_plan_rate" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
-
     </context>
 </generatorConfiguration>
