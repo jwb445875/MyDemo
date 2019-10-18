@@ -52,7 +52,10 @@ public class ExcelUtil<T> {
                     if (field.isAnnotationPresent(ExcelColumn.class)) {
                         ExcelColumn attr = field.getAnnotation(ExcelColumn.class);
                         // 根据Name来获取相应的failed
-                        int col = cellMap.get(attr.title().toLowerCase());
+                        Integer col = cellMap.get(attr.title().toLowerCase());
+                        if(col==null){
+                            continue;
+                        }
                         field.setAccessible(true);
                         fieldsMap.put(col, field);
                         if(attr.require()==1){
