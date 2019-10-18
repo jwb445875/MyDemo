@@ -106,6 +106,11 @@ public class ExcelUtil<T> {
                             if (c.length() > 0) {
                                 field.set(entity, c.charAt(0));
                             }
+                        }else if(Date.class==fieldType){
+                            try {
+                                field.set(entity,DateUtils.parseDate(c,new String []{"yyyy-MM-dd"}));
+                            }catch (Exception e){
+                            }
                         }
                     }
                     if (entity != null) {
