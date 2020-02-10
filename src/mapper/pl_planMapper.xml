@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movitech.product.planning.plan.dao.pl_planMapper">
+  <resultMap id="BaseResultMap" type="com.movitech.product.planning.plan.entity.pl_plan">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="meeting_plan_node_id" jdbcType="VARCHAR" property="meetingPlanNodeId" />
+    <result column="meeting_plan_name" jdbcType="VARCHAR" property="meetingPlanName" />
+    <result column="meeting_dept_id" jdbcType="VARCHAR" property="meetingDeptId" />
+    <result column="meeting_dept_name" jdbcType="VARCHAR" property="meetingDeptName" />
+    <result column="emcee_id" jdbcType="VARCHAR" property="emceeId" />
+    <result column="emcee_name" jdbcType="VARCHAR" property="emceeName" />
+    <result column="convene_date" jdbcType="TIMESTAMP" property="conveneDate" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, meeting_plan_node_id, meeting_plan_name, meeting_dept_id, meeting_dept_name, 
+    emcee_id, emcee_name, convene_date, created_by, created_date, updated_by, updated_date, 
+    version, delete_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.movitech.product.planning.plan.entity.pl_planExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pl_meeting_plan_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+      <if test="limitStart > -1">
+        limit ${limitStart} , ${limitEnd}
+      </if>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.movitech.product.planning.plan.entity.pl_planExample">
+    delete from pl_meeting_plan_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.movitech.product.planning.plan.entity.pl_plan">
+    insert into pl_meeting_plan_info (id, meeting_plan_node_id, meeting_plan_name, 
+      meeting_dept_id, meeting_dept_name, emcee_id, 
+      emcee_name, convene_date, created_by, 
+      created_date, updated_by, updated_date, 
+      version, delete_flag)
+    values (#{id,jdbcType=VARCHAR}, #{meetingPlanNodeId,jdbcType=VARCHAR}, #{meetingPlanName,jdbcType=VARCHAR}, 
+      #{meetingDeptId,jdbcType=VARCHAR}, #{meetingDeptName,jdbcType=VARCHAR}, #{emceeId,jdbcType=VARCHAR}, 
+      #{emceeName,jdbcType=VARCHAR}, #{conveneDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{updatedDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.movitech.product.planning.plan.entity.pl_plan">
+    insert into pl_meeting_plan_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meetingPlanNodeId != null">
+        meeting_plan_node_id,
+      </if>
+      <if test="meetingPlanName != null">
+        meeting_plan_name,
+      </if>
+      <if test="meetingDeptId != null">
+        meeting_dept_id,
+      </if>
+      <if test="meetingDeptName != null">
+        meeting_dept_name,
+      </if>
+      <if test="emceeId != null">
+        emcee_id,
+      </if>
+      <if test="emceeName != null">
+        emcee_name,
+      </if>
+      <if test="conveneDate != null">
+        convene_date,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingPlanNodeId != null">
+        #{meetingPlanNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingPlanName != null">
+        #{meetingPlanName,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDeptId != null">
+        #{meetingDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDeptName != null">
+        #{meetingDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="emceeId != null">
+        #{emceeId,jdbcType=VARCHAR},
+      </if>
+      <if test="emceeName != null">
+        #{emceeName,jdbcType=VARCHAR},
+      </if>
+      <if test="conveneDate != null">
+        #{conveneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.movitech.product.planning.plan.entity.pl_planExample" resultType="java.lang.Long">
+    select count(*) from pl_meeting_plan_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pl_meeting_plan_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingPlanNodeId != null">
+        meeting_plan_node_id = #{record.meetingPlanNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingPlanName != null">
+        meeting_plan_name = #{record.meetingPlanName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingDeptId != null">
+        meeting_dept_id = #{record.meetingDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingDeptName != null">
+        meeting_dept_name = #{record.meetingDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emceeId != null">
+        emcee_id = #{record.emceeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emceeName != null">
+        emcee_name = #{record.emceeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conveneDate != null">
+        convene_date = #{record.conveneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdBy != null">
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDate != null">
+        created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedBy != null">
+        updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedDate != null">
+        updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null">
+        delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pl_meeting_plan_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      meeting_plan_node_id = #{record.meetingPlanNodeId,jdbcType=VARCHAR},
+      meeting_plan_name = #{record.meetingPlanName,jdbcType=VARCHAR},
+      meeting_dept_id = #{record.meetingDeptId,jdbcType=VARCHAR},
+      meeting_dept_name = #{record.meetingDeptName,jdbcType=VARCHAR},
+      emcee_id = #{record.emceeId,jdbcType=VARCHAR},
+      emcee_name = #{record.emceeName,jdbcType=VARCHAR},
+      convene_date = #{record.conveneDate,jdbcType=TIMESTAMP},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+      version = #{record.version,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

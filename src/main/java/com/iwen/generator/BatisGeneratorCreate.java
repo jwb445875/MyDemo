@@ -12,14 +12,15 @@ import java.util.List;
 public class BatisGeneratorCreate {
 	
 
-	static String base="src/main/java/com/iwen/generator/xmls/";
+	static String base= "src/main/resources/xmls/";
 	static String dahua="mybatis-generator_dahua.xml";
+	static String songdu="mybatis-generator_songdu.xml";
 
 	public static void main(String[] args) throws Exception {
 		List<String> warnings = new ArrayList<String>();
 		ConfigurationParser cp = new ConfigurationParser(warnings);   
 		boolean overwrite = true;
-		File configFile = new File(base+dahua);
+		File configFile = new File(base+songdu);
 		try {
             Configuration config = cp.parseConfiguration(configFile);   
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);   
