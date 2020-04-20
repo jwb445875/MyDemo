@@ -54,17 +54,10 @@
 
         
 
-    	 <table tableName="pl_meeting_plan_info" domainObjectName="MeetingPlanInfo" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+
+ 		<table tableName="pl_plan_node" domainObjectName="pl_plan_node" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
      		 <property name="useActualColumnNames" value="false"/>
     	</table>
- 		<table tableName="pl_meeting_plan_node" domainObjectName="MeetingPlanNode" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
-        <table tableName="pl_meeting_plan_node_task" domainObjectName="MeetingPlanNodeTask" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="pl_meeting_user" domainObjectName="MeetingUser" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
+
     </context>
 </generatorConfiguration>

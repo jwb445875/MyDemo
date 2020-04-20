@@ -1,0 +1,71 @@
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="/Users/iwen/项目/MyDemo/libs/ojdbc14-10.2.0.4.0.jar" />
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <plugin type="com.iwen.generator.OraclePaginationPlugin"></plugin>
+
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<!--<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> 
+			<property name="searchString" value="Example$"/>
+			<property name="replaceString" value="Criteria"/>
+		</plugin> -->
+
+        <commentGenerator>
+        	<!-- 不生成注释 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+
+        <!-- oracle -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@172.19.50.64:1521:ORCL"
+            userId="DHS" password="DHS">
+        </jdbcConnection>
+
+        
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.aa.entity" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper.aa" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.aa.dao" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        
+
+    	 <table tableName="EM_KB_SUP_EVALUATE_DEDUCTION" domainObjectName="EmKbSupEvaluateDeduction" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+     		 <property name="useActualColumnNames" value="false"/>
+    	</table>
+        <table tableName="EM_KB_SUP_EVALUATE_DETAIL" domainObjectName="EmKbSupEvaluateDetail" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_KB_SUP_EVALUATE_MASTER" domainObjectName="EmKbSupEvaluateMaster" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table tableName="EM_KB_SUP_LEVEL" domainObjectName="EmKbSupLevel" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_KB_SUP_MAJOR_ISSUE" domainObjectName="EmKbSupMajorIssue" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_KB_SUP_SCALE" domainObjectName="EmKbSupScale" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
