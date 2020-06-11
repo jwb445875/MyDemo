@@ -47,23 +47,45 @@
 
         
 
-    	 <table tableName="EM_KB_SUP_EVALUATE_DEDUCTION" domainObjectName="EmKbSupEvaluateDeduction" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
-        <table tableName="EM_KB_SUP_EVALUATE_DETAIL" domainObjectName="EmKbSupEvaluateDetail" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="EM_KB_SUP_EVALUATE_MASTER" domainObjectName="EmKbSupEvaluateMaster" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
+<!--    	 <table tableName="EM_KB_SUP_EVALUATE_DEDUCTION" domainObjectName="EmKbSupEvaluateDeduction" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--     		 <property name="useActualColumnNames" value="false"/>-->
+<!--    	</table>-->
+<!--        <table tableName="EM_KB_SUP_EVALUATE_DETAIL" domainObjectName="EmKbSupEvaluateDetail" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
+<!--        <table tableName="EM_KB_SUP_EVALUATE_MASTER" domainObjectName="EmKbSupEvaluateMaster" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
 
-        <table tableName="EM_KB_SUP_LEVEL" domainObjectName="EmKbSupLevel" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+<!--        <table tableName="EM_KB_SUP_LEVEL" domainObjectName="EmKbSupLevel" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
+<!--        <table tableName="EM_KB_SUP_MAJOR_ISSUE" domainObjectName="EmKbSupMajorIssue" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
+<!--        <table tableName="EM_KB_SUP_MAJOR_ISSUE_DEDUC" domainObjectName="EmKbSupMajorIssueDeduc" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
+<!--        <table tableName="EM_KB_SUP_SCALE" domainObjectName="EmKbSupScale" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">-->
+<!--            <property name="useActualColumnNames" value="false"/>-->
+<!--        </table>-->
+
+        <table tableName="EM_BLOG_SET_UP" domainObjectName="EmBlogSetUp" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="EM_KB_SUP_MAJOR_ISSUE" domainObjectName="EmKbSupMajorIssue" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+        <table tableName="EM_BLOG_ITEM_REPLY" domainObjectName="EmBlogItemReply" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="EM_KB_SUP_SCALE" domainObjectName="EmKbSupScale" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+        <table tableName="EM_BLOG_SET_UP_PREINSTALL" domainObjectName="EmBlogSetUpPreinstall" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_BLOG_ITEM_FOLLOW" domainObjectName="EmBlogItemFollow" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_BLOG_USER_LABEL" domainObjectName="EmBlogUserLabel" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="EM_BLOG_WORK_TYPE" domainObjectName="EmBlogWorkType" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
 
