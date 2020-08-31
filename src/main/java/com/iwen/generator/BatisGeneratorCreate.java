@@ -16,12 +16,13 @@ public class BatisGeneratorCreate {
 	static String dahua="mybatis-generator_dahua.xml";
 	static String dahua2="mybatis-generator_dahua_huazhu.xml";
 	static String songdu="mybatis-generator_songdu.xml";
+	static String xuhui="mybatis-generator_xuhui.xml";
 
 	public static void main(String[] args) throws Exception {
 		List<String> warnings = new ArrayList<String>();
 		ConfigurationParser cp = new ConfigurationParser(warnings);   
 		boolean overwrite = true;
-		File configFile = new File(base+dahua2);
+		File configFile = new File(base+xuhui);
 		try {
             Configuration config = cp.parseConfiguration(configFile);   
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);   
