@@ -1,27 +1,27 @@
 BEGIN
-INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,
-node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,
+INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,manager,
+node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,full_finish_date,custom_bussiness_type,org_id,org_name,
 planned_finish_date,is_pre,to_days,`status`,is_deleted)
-SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,
-n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,
+SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,p.manager_id,
+n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,n.full_finish_date,p.custom_bussiness_type,p.org_id,p.org_name,
 n.planned_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(now()),n.`status`,1
 FROM pl_plan_version v
 join pl_plan p on v.plan_id=p.id
 join pl_plan_node n on n.version_id=v.id
-WHERE v.`status`=2 and v.is_deleted='0'  and v.is_freeze='0'
+WHERE v.`status` in (2,6) and v.is_deleted='0'  and v.is_freeze='0'
 and	n.is_quote = 0 AND  n.actual_finish_date IS NULL  AND n.is_deleted = '0'
 and to_days(n.planned_finish_date)-to_days(now()) <90;
 
-INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,
-node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,
+INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,manager,
+node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,full_finish_date,custom_bussiness_type,org_id,org_name,
 planned_finish_date,actual_finish_date,is_pre,to_days,`status`,is_deleted)
-SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,
-n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,
+SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,p.manager_id,
+n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,n.full_finish_date,p.custom_bussiness_type,p.org_id,p.org_name,
 n.planned_finish_date,n.actual_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(n.actual_finish_date),n.`status`,1
 FROM pl_plan_version v
 join pl_plan p on v.plan_id=p.id
 join pl_plan_node n on n.version_id=v.id
-WHERE v.`status`=2 and v.is_deleted='0'  and v.is_freeze='0'
+WHERE v.`status` in (2,6) and v.is_deleted='0'  and v.is_freeze='0'
 and	n.is_quote = 0 AND  n.`status`=6  AND n.is_deleted = '0'
 and to_days(n.planned_finish_date)-to_days(n.actual_finish_date) <0;
 
@@ -30,7 +30,7 @@ set r.company_name=i.company_name,
 r.project_no=i.project_no,r.project_name=i.project_name,
 r.fenqi_no=i.fenqi_no,r.fenqi_name=i.fenqi_name,
 r.manager=i.manager,r.pm=i.pm
-where r.fenqi_id=i.fenqi_id and r.is_deleted=1 and i.is_deleted=0;
+where r.fenqi_id=i.fenqi_id and r.is_deleted=1 and i.is_deleted=0 AND r.custom_bussiness_type='1';
 
 UPDATE pl_plan_node_delay r,(SELECT batch_id from pl_plan_node_delay   GROUP BY batch_id) c,
 (select  batch_code,batch_name from pl_batch  GROUP BY batch_code) b

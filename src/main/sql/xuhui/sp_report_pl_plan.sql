@@ -12,6 +12,7 @@ where  v.status in(2,6,7) and v.is_freeze='0' and v.is_deleted='0';
 
 insert into pl_plan_node_ext2
 select n.id,n.version_id,n.node_code,n.node_name,n.phase_id,n.level_id,n.planned_finish_date,n.actual_finish_date
+,n.`status`,n.check_finish_date,n.full_finish_date,n.must_score,n.actual_score,n.adjust_coef,n.adjust_count,n.is_exempt
 from  pl_plan_node n,pl_plan_node_ext t
 where  n.version_id = t.version_id  and n.is_deleted='0' ;
 
@@ -19,33 +20,37 @@ where  n.version_id = t.version_id  and n.is_deleted='0' ;
 
 insert into pl_report_pl_plan
 (id,version_id,plan_id,oa_date,version_name,finish_date_name,get_land_date,version_type,plan_version,
-phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type)
+phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type,`status`,check_finish_date,full_finish_date
+,must_score,actual_score,adjust_coef,adjust_count,is_exempt)
 SELECT uuid(),t.version_id,t.plan_id,t.oa_date,'' as version_name
 ,'实际完成时间' as finished_date_name,t.get_land_date,t.version_type,t.plan_version,
 d.phase_id,d.level_id,d.node_code,d.node_name,d.planned_finish_date ,
-d.actual_finish_date ,1
+d.actual_finish_date ,1,d.`status`,d.check_finish_date,d.full_finish_date
+,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt
 from pl_plan_node_ext t
 join pl_plan_node_ext2 d on t.version_id=d.version_id where t.status in(2,6);
 
 insert into pl_report_pl_plan
 (id,version_id,plan_id,oa_date,version_name,finish_date_name,get_land_date,version_type,plan_version,
-phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type)
+phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type,`status`,check_finish_date,full_finish_date
+,must_score,actual_score,adjust_coef,adjust_count,is_exempt)
 SELECT uuid(),t.version_id,t.plan_id,t.oa_date,'' as version_name
 ,'计划完成时间' as finished_date_name,t.get_land_date,t.version_type,t.plan_version,
 d.phase_id,d.level_id,d.node_code,d.node_name,d.planned_finish_date ,
-d.actual_finish_date ,2
+d.actual_finish_date ,2,d.`status`,d.check_finish_date,d.full_finish_date
+,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt
 from pl_plan_node_ext t
 join pl_plan_node_ext2 d on t.version_id=d.version_id;
 
 UPDATE pl_report_pl_plan r,pl_plan p
-set r.area_name=p.area_name,r.project_id=p.project_id,r.fenqi_id=p.fenqi_id,r.batch_id=p.batch_id,
+set r.area_id=p.area,r.area_name=p.area_name,r.project_id=p.project_id,r.fenqi_id=p.fenqi_id,r.batch_id=p.batch_id,
 r.plan_version_type=p.version_type,r.current_version=p.current_version,r.plan_type=p.type
 where r.plan_id=p.id;
 
 UPDATE pl_report_pl_plan r,pl_plan_info i
 set
 r.project_id=i.project_no,r.project_name=i.project_name,
-r.fenqi_name=i.fenqi_name
+r.fenqi_name=i.fenqi_name,r.company_id=i.company_id,r.company_name=i.company_name
 where  r.fenqi_id=i.fenqi_id;
 
 UPDATE pl_report_pl_plan r,(SELECT batch_id from pl_report_pl_plan   GROUP BY batch_id) c,
@@ -54,8 +59,50 @@ set r.batch_name=b.batch_name
 where r.batch_id=c.batch_id and b.batch_code=c.batch_id;
 
 UPDATE pl_report_pl_plan p,sys_dictionary_data d
-set p.version_name=concat(d.dict_label_cn,p.plan_version)
-where d.dict_type = 'planning_versionType_two' and d.dict_value = p.version_type and p.type=2;
+set p.version_name=concat(d.dict_label_cn,'V',p.plan_version)
+where d.dict_type = 'planning_versionType_two' and p.plan_type='1' and d.dict_value = p.version_type ;
 
+UPDATE pl_report_pl_plan p
+set p.version_name=concat('V',p.plan_version)
+where p.plan_type='2';
 
+UPDATE pl_report_pl_plan set `status`=1 where  `status`!=6 and DATEDIFF(now(),planned_finish_date)<=0;
+UPDATE pl_report_pl_plan set `status`=2 where  `status`!=6 and DATEDIFF(now(),planned_finish_date)>0;
+UPDATE pl_report_pl_plan set `status`=4 where  `status`=6 and DATEDIFF(actual_finish_date,planned_finish_date)>0;
+UPDATE pl_report_pl_plan set `status`=3 where  `status`=6;
+
+UPDATE pl_report_pl_plan  set must_score=2,actual_score=0 where type=1 and plan_type='1' and level_id='2';
+UPDATE pl_report_pl_plan  set must_score=2,actual_score=0 where type=1 and plan_type='1' and level_id='1';
+UPDATE pl_report_pl_plan  set must_score=1,actual_score=0 where type=1 and plan_type='1' and level_id!='1' and level_id!='2';
+UPDATE pl_report_pl_plan set must_score=5 where  type=1 and plan_type='1' and node_code in ('JT-LCB-00003','JT-LCB-00004');
+UPDATE pl_report_pl_plan  set actual_score=must_score*100*adjust_coef where type=1 and plan_type='1' and `status`=3;
+
+UPDATE pl_report_pl_plan set must_score=null,actual_score=0 where type=1 and plan_type='2';
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.milestone_normal_score
+where p.type=1 and p.plan_type='2'  and p.level_id='1' and p.area_id=s.id;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s,pl_plan_milestone_node n set p.must_score=s.milestone_special_score
+where p.type=1 and p.plan_type='2'  and p.level_id='1' and p.area_id=s.id and n.plan_node_score_id=s.id and n.node_code=p.node_code;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.one_score
+where p.type=1 and p.plan_type='2'  and p.level_id='2' and p.area_id=s.id;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.two_score
+where p.type=1 and p.plan_type='2'  and p.level_id='3' and p.area_id=s.id;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.three_score
+where p.type=1 and p.plan_type='2'  and p.level_id='4' and p.area_id=s.id;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.four_score
+where p.type=1 and p.plan_type='2'  and p.level_id not in ('1','2','3','4') and p.area_id=s.id;
+
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.milestone_normal_score
+where p.type=1 and p.plan_type='2'  and p.level_id='1' and s.id='00000001' and p.must_score is null;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s,pl_plan_milestone_node n set p.must_score=s.milestone_special_score
+where p.type=1 and p.plan_type='2'  and p.level_id='1' and  s.id='00000001' and p.must_score is null and n.plan_node_score_id=s.id and n.node_code=p.node_code;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.one_score
+where p.type=1 and p.plan_type='2'  and p.level_id='2' and s.id='00000001' and p.must_score is null;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.two_score
+where p.type=1 and p.plan_type='2'  and p.level_id='3' and s.id='00000001' and p.must_score is null;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.three_score
+where p.type=1 and p.plan_type='2'  and p.level_id='4' and s.id='00000001' and p.must_score is null;
+UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.four_score
+where p.type=1 and p.plan_type='2'  and p.level_id not in ('1','2','3','4') and s.id='00000001' and p.must_score is null;
+UPDATE pl_report_pl_plan set actual_score=must_score where type=1 and plan_type='2' and `status`=3;
+UPDATE pl_report_pl_plan set actual_score=null where type=1 and plan_type='2' and `status`=1;
 end
