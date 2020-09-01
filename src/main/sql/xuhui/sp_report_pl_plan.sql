@@ -60,7 +60,7 @@ where r.batch_id=c.batch_id and b.batch_code=c.batch_id;
 
 UPDATE pl_report_pl_plan p,sys_dictionary_data d
 set p.version_name=concat(d.dict_label_cn,'V',p.plan_version)
-where d.dict_type = 'planning_versionType_two' and p.plan_type='1' and d.dict_value = p.version_type ;
+where d.dict_type = 'planning_versionType_two' and p.plan_type='1' and p.type=2 and d.dict_value = p.version_type ;
 
 UPDATE pl_report_pl_plan p
 set p.version_name=concat('V',p.plan_version)
