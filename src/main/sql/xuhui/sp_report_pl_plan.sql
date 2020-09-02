@@ -4,15 +4,18 @@ truncate table pl_plan_node_ext2;
 truncate table pl_report_pl_plan;
 
 insert into pl_plan_node_ext
-select v.id,v.plan_id,v.oa_date,n.planned_finish_date ,v.status,v.version_type,v.plan_version
+select v.id,v.plan_id,v.oa_date,n.planned_finish_date ,v.status,v.version_type,v.plan_version,t.operate_type
 from  pl_plan_version v
+join pl_plan p on v.plan_id=p.id
+left join pl_template t on p.template_id=t.id
 left join pl_plan_node n
 on n.version_id = v.id and n.node_code = 'JT-LCB-00001'  and n.is_deleted='0'
 where  v.status in(2,6,7) and v.is_freeze='0' and v.is_deleted='0';
 
 insert into pl_plan_node_ext2
 select n.id,n.version_id,n.node_code,n.node_name,n.phase_id,n.level_id,n.planned_finish_date,n.actual_finish_date
-,n.`status`,n.check_finish_date,n.full_finish_date,n.must_score,n.actual_score,n.adjust_coef,n.adjust_count,n.is_exempt
+,n.`status`,n.check_finish_date,n.full_finish_date,n.must_score,n.actual_score,n.adjust_coef,n.adjust_count,n.is_exempt,
+n.is_pre,n.is_quote,n.exempt_coef,n.is_zero
 from  pl_plan_node n,pl_plan_node_ext t
 where  n.version_id = t.version_id  and n.is_deleted='0' ;
 
@@ -21,24 +24,24 @@ where  n.version_id = t.version_id  and n.is_deleted='0' ;
 insert into pl_report_pl_plan
 (id,version_id,plan_id,oa_date,version_name,finish_date_name,get_land_date,version_type,plan_version,
 phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type,`status`,check_finish_date,full_finish_date
-,must_score,actual_score,adjust_coef,adjust_count,is_exempt)
+,must_score,actual_score,adjust_coef,adjust_count,is_exempt,is_pre,is_quote,exempt_coef,is_zero,operate_type)
 SELECT uuid(),t.version_id,t.plan_id,t.oa_date,'' as version_name
 ,'实际完成时间' as finished_date_name,t.get_land_date,t.version_type,t.plan_version,
 d.phase_id,d.level_id,d.node_code,d.node_name,d.planned_finish_date ,
 d.actual_finish_date ,1,d.`status`,d.check_finish_date,d.full_finish_date
-,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt
+,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt,d.is_pre,d.is_quote,d.exempt_coef,d.is_zero,t.operate_type
 from pl_plan_node_ext t
 join pl_plan_node_ext2 d on t.version_id=d.version_id where t.status in(2,6);
 
 insert into pl_report_pl_plan
 (id,version_id,plan_id,oa_date,version_name,finish_date_name,get_land_date,version_type,plan_version,
 phase_id,level_id,node_code,node_name,planned_finish_date,actual_finish_date,type,`status`,check_finish_date,full_finish_date
-,must_score,actual_score,adjust_coef,adjust_count,is_exempt)
+,must_score,actual_score,adjust_coef,adjust_count,is_exempt,is_pre,is_quote,exempt_coef,is_zero,operate_type)
 SELECT uuid(),t.version_id,t.plan_id,t.oa_date,'' as version_name
 ,'计划完成时间' as finished_date_name,t.get_land_date,t.version_type,t.plan_version,
 d.phase_id,d.level_id,d.node_code,d.node_name,d.planned_finish_date ,
 d.actual_finish_date ,2,d.`status`,d.check_finish_date,d.full_finish_date
-,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt
+,d.must_score,d.actual_score,d.adjust_coef,d.adjust_count,d.is_exempt,d.is_pre,d.is_quote,d.exempt_coef,d.is_zero,t.operate_type
 from pl_plan_node_ext t
 join pl_plan_node_ext2 d on t.version_id=d.version_id;
 
@@ -75,7 +78,8 @@ UPDATE pl_report_pl_plan  set must_score=2,actual_score=0 where type=1 and plan_
 UPDATE pl_report_pl_plan  set must_score=2,actual_score=0 where type=1 and plan_type='1' and level_id='1';
 UPDATE pl_report_pl_plan  set must_score=1,actual_score=0 where type=1 and plan_type='1' and level_id!='1' and level_id!='2';
 UPDATE pl_report_pl_plan set must_score=5 where  type=1 and plan_type='1' and node_code in ('JT-LCB-00003','JT-LCB-00004');
-UPDATE pl_report_pl_plan  set actual_score=must_score*100*adjust_coef where type=1 and plan_type='1' and `status`=3;
+UPDATE pl_report_pl_plan  set actual_score=must_score*100*exempt_coef where type=1 and plan_type='1' and is_zero=0 and `status`=3 and DATEDIFF(check_finish_date,actual_finish_date)>=0;
+UPDATE pl_report_pl_plan  set actual_score=must_score*100*adjust_coef where type=1 and plan_type='1' and is_zero=0 and `status`=3 and DATEDIFF(check_finish_date,actual_finish_date)<0;
 
 UPDATE pl_report_pl_plan set must_score=null,actual_score=0 where type=1 and plan_type='2';
 UPDATE pl_report_pl_plan p,pl_plan_node_score s set p.must_score=s.milestone_normal_score

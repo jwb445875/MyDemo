@@ -1,4 +1,5 @@
 BEGIN
+truncate table pl_report_plan_node_feed;
 INSERT pl_report_plan_node_feed(id,type,area_id,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,
 node_name,level_id,planned_finish_date,risk_type,risk_comment,feedback_date)
 SELECT DISTINCT
