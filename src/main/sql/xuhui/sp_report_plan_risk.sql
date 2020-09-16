@@ -16,13 +16,13 @@ KEY `idx_version_id_` (`plan_id`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '预警etl中间表3';
 INSERT into pl_report_plan_version(id,plan_id,version_type,version_type2,plan_version)
 SELECT UUID_SHORT(),plan_id,version_type,version_type,MAX(plan_version) from pl_plan_version
-where `status` in (2,6,7)  and version_type!='0' GROUP BY plan_id,version_type;
+where `status` in (2,6,7)  and version_type!='0' and is_freeze='0' and is_deleted='0' GROUP BY plan_id,version_type;
 UPDATE pl_report_plan_version pv,pl_plan_version v set pv.version_id=v.id,pv.plan_parameter_id=v.plan_parameter_id
 where pv.plan_id=v.plan_id and pv.version_type=v.version_type and pv.plan_version=v.plan_version;
 INSERT into pl_report_plan_version(id,plan_id,version_id,version_type,version_type2,plan_version,plan_parameter_id)
 SELECT UUID_SHORT(),p.id,v.id,'0',v.version_type,v.plan_version,v.plan_parameter_id
 from pl_plan p,pl_plan_version v
-where p.id=v.plan_id and  v.`status` in (2,6) and p.type='1';
+where p.id=v.plan_id and  v.`status` in (2,6) and p.type='1' and v.is_freeze='0' and v.is_deleted='0';
 
 insert into pl_report_plan_risk(id,area_id,area_name,company_id,project_id,fenqi_id,batch_id,plan_id,plan_name,
 version_type,current_version,floor_num,
@@ -53,7 +53,7 @@ join pl_report_plan_version pv on pv.plan_id=p.id and pv.version_type=w.version_
 join pl_plan_parameter pp on pp.id=pv.plan_parameter_id
 join pl_plan_node n on n.version_id=pv.version_id and n.node_code=w.node_code
 where w.org_id='00000001' and w.`status`='0';
-
+DELETE from pl_report_plan_risk where plan_name like '%禁用%';
 INSERT into pl_report_plan_risk1
 SELECT UUID_SHORT(),r.plan_id,wn.node_code,r.node_date,r.warn_date,w.multiple*r.floor_num+w.days ,r.node_status,wn.version_type,r.id
 from pl_report_plan_risk r
