@@ -1,10 +1,10 @@
 BEGIN
 INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,manager,
 node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,full_finish_date,custom_bussiness_type,org_id,org_name,
-planned_finish_date,is_pre,to_days,`status`,is_deleted)
+planned_finish_date,is_pre,to_days,`status`,is_deleted,plan_type_id,biz_type,business_type)
 SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,p.manager_id,
 n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,n.full_finish_date,p.custom_bussiness_type,p.org_id,p.org_name,
-n.planned_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(now()),n.`status`,1
+n.planned_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(now()),n.`status`,1,p.plan_type_id,p.biz_type,p.business_type
 FROM pl_plan_version v
 join pl_plan p on v.plan_id=p.id
 join pl_plan_node n on n.version_id=v.id
@@ -14,10 +14,10 @@ and to_days(n.planned_finish_date)-to_days(now()) <90;
 
 INSERT pl_plan_node_delay(id,plan_id,type,area,area_name,company_id,project_id,fenqi_id,plan_name,batch_id,version_id,current_version,version_type,manager_name,manager,
 node_id,unique_code,is_quote,node_name,level_id,phase_id,charger_id,charger_role,full_finish_date,custom_bussiness_type,org_id,org_name,
-planned_finish_date,actual_finish_date,is_pre,to_days,`status`,is_deleted)
+planned_finish_date,actual_finish_date,is_pre,to_days,`status`,is_deleted,plan_type_id,biz_type,business_type)
 SELECT  uuid(),p.id,p.type, p.area,p.area_name,p.company_id,p.project_id,p.fenqi_id,p.plan_name,p.batch_id,v.id,p.current_version,p.version_type,p.manager_name,p.manager_id,
 n.id,n.unique_code,n.is_quote,n.node_name,n.level_id,n.phase_id,n.charger_id,n.charger_role,n.full_finish_date,p.custom_bussiness_type,p.org_id,p.org_name,
-n.planned_finish_date,n.actual_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(n.actual_finish_date),n.`status`,1
+n.planned_finish_date,n.actual_finish_date,n.is_pre,to_days(n.planned_finish_date)-to_days(n.actual_finish_date),n.`status`,1,p.plan_type_id,p.biz_type,p.business_type
 FROM pl_plan_version v
 join pl_plan p on v.plan_id=p.id
 join pl_plan_node n on n.version_id=v.id
