@@ -2,13 +2,13 @@ BEGIN
 
 truncate table pl_report_imp_node_date_distribution;
 insert into pl_report_imp_node_date_distribution
-(id,type,area_id,area_name,company_id,project_id,fenqi_id,batch_id,version_type,
-dimension,node_code,node_name,finish_date)
-select uuid(),a.type,a.area,a.area_name,a.company_id,project_id,a.fenqi_id,a.batch_id,b.version_type
+(id,type,plan_type_id,biz_type,business_type,area_id,area_name,company_id,project_id,fenqi_id,batch_id,version_type,
+dimension,node_code,node_name,finish_date,node_biz_type)
+select uuid(),a.type,a.plan_type_id,a.biz_type,a.business_type,a.area,a.area_name,a.company_id,project_id,a.fenqi_id,a.batch_id,b.version_type
 ,case when node_code = 'JT-LCB-00048' then 1
 when node_code = 'JT-LCB-00003' or node_code = 'JT-LCB-00004' then 2
 else 3 end as dimension
-,d.node_code,d.node_name,ifnull(d.actual_finish_date,d.planned_finish_date) as finish_date
+,d.node_code,d.node_name,ifnull(d.actual_finish_date,d.planned_finish_date) as finish_date,d.biz_type
 from pl_plan_version b
 inner join pl_plan a on a.id = b.plan_id
 inner join pl_plan_node d
@@ -25,9 +25,9 @@ where  r.fenqi_id=i.fenqi_id;
 UPDATE pl_report_imp_node_date_distribution r,(SELECT batch_id from pl_report_imp_node_date_distribution   GROUP BY batch_id) c,
 (select  batch_code,batch_name from pl_batch  GROUP BY batch_code) b
 set r.batch_name=b.batch_name
-where r.batch_id=c.batch_id and b.batch_code=c.batch_id;
+where r.batch_id=c.batch_id and b.batch_code=c.batch_id and r.plan_type_id='1';
 
 UPDATE pl_report_imp_node_date_distribution p,sys_dictionary_data d
 set p.version_name=d.dict_label_cn
-where d.dict_type = 'planning_versionType_two' and d.dict_value = p.version_type;
+where d.dict_type = 'planning_versionType_all' and d.dict_value = p.version_type;
 END

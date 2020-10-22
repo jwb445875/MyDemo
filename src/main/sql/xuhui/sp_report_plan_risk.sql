@@ -22,7 +22,7 @@ where pv.plan_id=v.plan_id and pv.version_type=v.version_type and pv.plan_versio
 INSERT into pl_report_plan_version(id,plan_id,version_id,version_type,version_type2,plan_version,plan_parameter_id)
 SELECT UUID_SHORT(),p.id,v.id,'0',v.version_type,v.plan_version,v.plan_parameter_id
 from pl_plan p,pl_plan_version v
-where p.id=v.plan_id and  v.`status` in (2,6) and p.type='1' and v.is_freeze='0' and v.is_deleted='0';
+where p.id=v.plan_id and  v.`status` in (2,6) and p.type='1' and v.is_freeze='0' and v.is_deleted='0' ;
 
 insert into pl_report_plan_risk(id,area_id,area_name,company_id,project_id,fenqi_id,batch_id,plan_id,plan_name,
 version_type,current_version,floor_num,
