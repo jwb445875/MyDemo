@@ -33,7 +33,7 @@ public class TesttController {
         System.out.println(birthday);
 
         LocalDateTime now=LocalDateTime.now().plusDays(3);
-        DateTimeFormatter format=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter format=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss SSS");
         System.out.println(now.format(format));
     }
 
