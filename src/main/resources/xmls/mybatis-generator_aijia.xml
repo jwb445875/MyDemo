@@ -29,9 +29,9 @@
         <!-- 数据库连接 只用一个 -->
 		<!-- mysql-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-         connectionURL="jdbc:mysql://10.129.36.91:3306/ark?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
-	 	 userId="apps"
-         password="Temp_123">
+         connectionURL="jdbc:mysql://172.20.7.89:3306/ark?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
+	 	 userId="root"
+         password="Movit-tech">
     	</jdbcConnection>
 
         
@@ -55,13 +55,13 @@
         
 
 
- 		<table tableName="pl_report_plan_adjust_master" domainObjectName="pl_report_plan_adjust_master" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
-     		 <property name="useActualColumnNames" value="false"/>
-    	</table>
-        <table tableName="pl_report_plan_adjust_detail" domainObjectName="pl_report_plan_adjust_detail" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+
+        <table tableName="pl_project" domainObjectName="pl_project" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
         </table>
-
+        <table tableName="pl_phase" domainObjectName="pl_phase" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
 
     </context>
 </generatorConfiguration>
