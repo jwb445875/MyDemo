@@ -6,6 +6,7 @@ import com.iwen.bookTicket.service.CostDeptService;
 import com.iwen.bookTicket.service.SycnIdmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class CostDeptController {
     @Autowired
     private JobLogMapper jobLogMapper;
 
-    @RequestMapping("upAll")
+    @GetMapping("upAll")
     public Object upAll2(String sycnDate) {
         String filter;
         if(sycnDate!=null&&sycnDate.length()==10){

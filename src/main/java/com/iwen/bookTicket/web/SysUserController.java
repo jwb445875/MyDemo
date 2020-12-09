@@ -5,6 +5,7 @@ import com.iwen.bookTicket.service.SycnIdmService;
 import com.iwen.bookTicket.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,13 +24,13 @@ public class SysUserController {
     private SysUserService userService;
 
 
-    @RequestMapping("getUser")
+    @GetMapping("getUser")
     public Object getUser(String account) {
         SysUser u=userService.getUserByAccount(account);
         return "hello"+u.getId();
     }
 
-    @RequestMapping("getPhone")
+    @GetMapping("getPhone")
     public Object getPhone(String account) {
         String phone;
         try {
@@ -41,7 +42,7 @@ public class SysUserController {
         return "phone:"+phone;
     }
 
-    @RequestMapping("upPhone")
+    @GetMapping("upPhone")
     public Object upPhone() {
         int count=100;
         int i=1;
@@ -52,7 +53,7 @@ public class SysUserController {
         return "finish";
     }
 
-    @RequestMapping("upAll")
+    @GetMapping("upAll")
     public Object upAll() {
         userService.upAll();
         return "finish";

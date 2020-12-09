@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("getUser")
+    @GetMapping("getUser")
     public Object getUser(String account) {
         TSUser u=userService.getUserByAccount(account);
         return "hello"+u.getId();
