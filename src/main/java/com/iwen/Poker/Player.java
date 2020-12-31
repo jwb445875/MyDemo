@@ -56,4 +56,8 @@ public class Player {
     public void sortPokers() {
         pokers= (ArrayList<Poker>) pokers.stream().sorted(Comparator.comparing(p->p.getPointer().getNo())).collect(toList());
     }
+
+    public void sortByFlowerPokers() {
+        pokers= (ArrayList<Poker>) pokers.stream().sorted(Comparator.comparing(p->p.getFlower().getNo())).collect(toList());
+    }
 }

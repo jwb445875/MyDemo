@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class LaoSongGame {
-    static List<Player> players;
+    static List<LaoSongPlayer> players;
     static ArrayList<Poker> list = new ArrayList<>();
 
     static FlowerEnum[] flowers = FlowerEnum.values2();
@@ -23,7 +23,7 @@ public class LaoSongGame {
             }
         }
         // 初始化玩家
-        players = Arrays.asList(new Player(1, "我"), new Player(2, "上家"), new Player(3, "对家"), new Player(4, "下家"));
+        players = Arrays.asList(new LaoSongPlayer(1, "我"), new LaoSongPlayer(2, "上家"), new LaoSongPlayer(3, "对家"), new LaoSongPlayer(4, "下家"));
     }
 
     // 随机庄家
@@ -49,12 +49,20 @@ public class LaoSongGame {
     public void start() {
         pushBoss();
         pushPoker();
-        for (Player p : players) {
-            p.sortPokers();
-            if(p.isBoss()){
-                System.err.println(p.getName()+p.getPokers());
+        for (LaoSongPlayer p : players) {
+            p.doPoker();
+            StringBuilder sb=new StringBuilder();
+            sb.append(p.getName()).append(":");
+            if(p.isTianPai()){
+                sb.append(p.getTianPaiName());
+                sb.append(p.getPokers());
             }else {
-                System.out.println(p.getName()+p.getPokers());
+                sb.append(p.getHead()).append(p.getMiddle()).append(p.getEnd());
+            }
+            if(p.isBoss()){
+                System.err.println(sb.toString());
+            }else {
+                System.out.println(sb.toString());
             }
 
         }
