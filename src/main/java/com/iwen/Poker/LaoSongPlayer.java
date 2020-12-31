@@ -15,8 +15,10 @@ public class LaoSongPlayer extends Player{
     private ArrayList<Poker> f3 = new ArrayList<>();
     private ArrayList<Poker> f4 = new ArrayList<>();
 
-    public LaoSongPlayer() {
-    }
+    private int xiaoNum=0;//小于等于5的数
+    private int bigNum=0;//大于大于10的数
+    private int aNum=0;//A的数
+
 
     public LaoSongPlayer(int id, String name) {
         super(id, name);
@@ -62,37 +64,6 @@ public class LaoSongPlayer extends Player{
         this.end = end;
     }
 
-    public ArrayList<Poker> getF1() {
-        return f1;
-    }
-
-    public void setF1(ArrayList<Poker> f1) {
-        this.f1 = f1;
-    }
-
-    public ArrayList<Poker> getF2() {
-        return f2;
-    }
-
-    public void setF2(ArrayList<Poker> f2) {
-        this.f2 = f2;
-    }
-
-    public ArrayList<Poker> getF3() {
-        return f3;
-    }
-
-    public void setF3(ArrayList<Poker> f3) {
-        this.f3 = f3;
-    }
-
-    public ArrayList<Poker> getF4() {
-        return f4;
-    }
-
-    public void setF4(ArrayList<Poker> f4) {
-        this.f4 = f4;
-    }
 
     public void doPoker(){
         sortPokers();
@@ -126,10 +97,31 @@ public class LaoSongPlayer extends Player{
             }else if(p.getFlower().getNo()==4){
                 f4.add(p);
             }
+            if(p.getPointer().getNo()==15){
+                aNum++;
+            }else if(p.getPointer().getNo()>10){
+                bigNum++;
+            }else if(p.getPointer().getNo()>5){
+            }else {
+                xiaoNum++;
+            }
         }
     }
 
     private void check() {
+        if(bigNum>=7){
+            this.tianPai=true;
+            this.tianPaiName="7老头";
+            return;
+        }else if(bigNum==0){
+            this.tianPai=true;
+            this.tianPaiName=aNum==0?"全小":"半小";
+            return;
+        }else if(xiaoNum==0){
+            this.tianPai=true;
+            this.tianPaiName=aNum==0?"全大":"半大";
+            return;
+        }
         boolean is3tonghua=check3tonghua();
         if(is3tonghua){
             this.tianPai=true;

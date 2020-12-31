@@ -1,7 +1,7 @@
 package com.iwen.Poker;
 
 public enum PointEnum {
-    p1(15,"a"),
+    p1(15,"A"),
     p2(2,"2"),
     p3(3,"3"),
     p4(4,"4"),
