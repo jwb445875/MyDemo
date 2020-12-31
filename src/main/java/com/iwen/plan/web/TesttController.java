@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,7 +23,11 @@ public class TesttController {
 
 
     public static void main(String[] args) {
-        testDate2();
+        for(int i=0;i<10;i++){
+            DayOfWeek now=LocalDateTime.now().plusDays(i).getDayOfWeek();
+            System.out.println(now.getValue());
+        }
+
     }
 
     private static void testDate2() {
