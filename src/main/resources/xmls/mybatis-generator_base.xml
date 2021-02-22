@@ -1,0 +1,73 @@
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- 基础包 只用一个 -->
+	<!-- mysql-->
+    <classPathEntry location="/Users/iwen/项目/MyDemo/libs/jtds-1.3.1.jar" />
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<plugin type="com.iwen.generator.MysqlPaginationPlugin"></plugin>
+
+		
+		<!-- 通用 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<!--<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> 
+			<property name="searchString" value="Example$"/>
+			<property name="replaceString" value="Criteria"/>
+		</plugin> -->
+
+        <commentGenerator>
+        	<!-- 不生成注释 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库连接 只用一个 -->
+		<!-- mysql-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+         connectionURL="jdbc:mysql://172.20.235.140:3306/mvplan?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
+	 	 userId="root"
+         password="Movit-tech">
+    	</jdbcConnection>
+
+        
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.movitech.product.planning.plan.entity" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.movitech.product.planning.plan.dao" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        
+
+
+
+        <table tableName="pl_keyword_node_set" domainObjectName="pl_keyword_node_set" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="pl_production_type" domainObjectName="pl_production_type" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="pl_report_plan_complete" domainObjectName="pl_report_plan_complete" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="pl_plan_node_supervisor" domainObjectName="pl_plan_node_supervisor" enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
